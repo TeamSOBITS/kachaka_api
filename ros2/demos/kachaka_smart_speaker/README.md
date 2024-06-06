@@ -51,7 +51,7 @@
 
 ```
 cd ~
-git clone https://github.com/pf-robotics/kachaka-api.git
+git clone https://github.com/TeamSOBITS/kachaka-api.git
 pip install paho-mqtt
 
 mkdir -p ~/ros2_ws/src

@@ -247,7 +247,7 @@ callback機能については[sample_llm_speak.py](python/demos/sample_llm_speak
 
 ```
 cd ~
-git clone https://github.com/pf-robotics/kachaka-api.git
+git clone https://github.com/TeamSOBITS/kachaka-api.git
 ```
 
 ### kachaka_interfaces, kachaka_descriptionのビルド 
@@ -259,6 +259,13 @@ mkdir -p ~/ros2_ws/src
 cd ~/ros2_ws/src
 ln -s ~/kachaka-api/ros2/kachaka_interfaces/ kachaka_interfaces
 ln -s ~/kachaka-api/ros2/kachaka_description/ kachaka_description
+
+python3 -m pip install -U pip
+python3 -m pip install setuptools==58.2.0
+
+sudo apt update
+sudo apt install -y \
+    ros-humble-image-transport-plugins
 
 cd ~/ros2_ws
 colcon build
@@ -365,7 +372,7 @@ ssh -p 26500 -i <登録した公開鍵に対応する秘密鍵> kachaka@<kachaka
 
 ```
 cd ~
-git clone https://github.com/pf-robotics/kachaka-api.git
+git clone https://github.com/TeamSOBITS/kachaka-api.git
 pip install -r /home/kachaka/kachaka-api/python/demos/requirements.txt
 python3 /home/kachaka/kachaka-api/python/demos/time_signal.py 100.94.1.1:26400
 ```
