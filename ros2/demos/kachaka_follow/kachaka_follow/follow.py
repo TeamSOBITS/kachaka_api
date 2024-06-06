@@ -14,17 +14,24 @@ ANGULAR_TOLERANCE = 0.8
 class Follower(Node):
     def __init__(self) -> None:
         super().__init__("follow")
+        # QoS profile for the subscription
+        qos_policy = rclpy.qos.QoSProfile(reliability=rclpy.qos.ReliabilityPolicy.BEST_EFFORT,
+                                          history=rclpy.qos.HistoryPolicy.KEEP_LAST,
+                                          depth=1)
+
         self._publisher = self.create_publisher(
             Twist, "/kachaka/manual_control/cmd_vel", 10
         )
         self._lidar_subscriber = self.create_subscription(
-            LaserScan, "/kachaka/lidar/scan", self._laser_scan_callback, 10
+            LaserScan, "/kachaka/lidar/scan",
+            self._laser_scan_callback,
+            qos_profile=qos_policy
         )
         self._object_detection_subscriber = self.create_subscription(
             ObjectDetectionListStamped,
             "/kachaka/object_detection/result",
             self._object_detection_callback,
-            10,
+            qos_profile=qos_policy,
         )
         self._timer = self.create_timer(0.1, self._publish_cmd_vel)
         self._cmd_vel = Twist()
